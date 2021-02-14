@@ -45,15 +45,25 @@ router.delete('/meeting:id', async (req, res) => {
 
 // UPDATE Meetings
 
-// router.delete('/meeting:id', async (req, res) => {
-//   try {
-//     await Meeting.updateOne({_id: new mongodb.ObjectID(req.headers.id)});
-//     res.sendStatus(200);
-//   } catch (error) {
-//     console.log(error);
-//     res.sendStatus(500);
-//   }
-// });
+router.put('/meeting:id', async (req, res) => {
+  try {
+    await Meeting.updateOne({_id: req.body.id},{
+      $set: {      
+      "link":req.body.link,
+      "weekly":req.body.weekly,
+      "time":req.body.time,
+      "title":req.body.title,
+      "notes": req.body.notes
+    }
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+
 
 
 module.exports = router;

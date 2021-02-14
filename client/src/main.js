@@ -27,7 +27,7 @@ Vue.use(VueRouter)
 
 //Vuex
 Vue.use(Vuex)
-import { store } from './store/store' 
+import { store } from './store/store'
 
 //Vue Meta
 Vue.use(VueMeta)
@@ -37,6 +37,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import './registerServiceWorker'
 
 
 Vue.use(VueAxios, axios)

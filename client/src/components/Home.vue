@@ -37,10 +37,10 @@ export default {
   .hero{
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    height: 80vh;
+    height: 100vh;
 
     & h1{
-      padding-top: 25vh;
+      padding-top: 40vh;
       text-align: center;
     }
 

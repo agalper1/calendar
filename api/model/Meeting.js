@@ -24,6 +24,10 @@ const meetingSchema = new mongoose.Schema({
   time:{
     type: String,
     required: true
+  },
+  notes:{
+    type: String,
+    required: false
   }
 });
 

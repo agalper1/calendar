@@ -10,7 +10,7 @@ const {
 
 
 
-//Regestrierung
+//Registrierung
 
 router.post('/register', async (req, res) => {
   const {error} = registerValidation(req.body);

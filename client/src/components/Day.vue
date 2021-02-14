@@ -4,7 +4,7 @@
     <p :class="active ? '':'p-date'">{{currentDate}}</p>
 <transition name="fade" mode="in-out">
     <div v-if="active">
-      <Meeting  v-for="(meeting,index) in meetings" :key="index" :thisTitle="meetings[index].title" :thisTime="meetings[index].time" :thisLink="meetings[index].link"  v-on:delete-meeting="deleteMeeting (index)" />
+      <Meeting  v-for="(meeting,index) in meetings" :key="index" :thisTitle="meetings[index].title" :thisTime="meetings[index].time" :thisLink="meetings[index].link" :thisWeekly="meetings[index].weekly" :thisNotes="meetings[index].notes" v-on:delete-meeting="deleteMeeting (index)" :meetingId="meetings[index]._id" />
     </div>
 </transition>
    

@@ -66,7 +66,6 @@ export default {
           const username = response.data.username;
           this.$store.commit('setToken', token);
           this.$store.commit('setUsername', username);
-          console.log(token,username);
           this.$router.push('/calendar');
         })
         .catch(error => {
