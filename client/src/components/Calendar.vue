@@ -32,7 +32,7 @@ export default {
     return {
       weekday : moment().isoWeekday() -1,
       activeDate:'',
-      week: -1,
+      week: this.weekday == 6 ? -1 : 0,
       mobile: false,
       days: Array.apply(null, Array(7)).map(function (){ return {}}
       )
@@ -177,7 +177,7 @@ export default {
     }
   },
   created() {
-    this.init(-1),
+    this.init(this.week),
     this.activeDate = moment().format("DD.M.YY");
     this.updateDate(this.activeDate);
     this.updateWeekNr(this.weekday);
