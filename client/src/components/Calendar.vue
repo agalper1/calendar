@@ -122,13 +122,14 @@ export default {
           Authorization: this.token,
           activedate: moment().format("D.M.YY"),
           username: this.username,
-          weekNr: moment().format("e")
+          weekNr: moment().format("e")-1
         }
       })
         .then(response => {
           for(let i=0;i<response.data.length;i++){
           notifMeeting[i] = response.data[i];
           timerGoal[i] = parseInt(response.data[i].time.replace(":",""));
+          console.log(timerGoal[i]);
           }
         })
         .catch(error => {
@@ -136,10 +137,16 @@ export default {
         });
 
       setInterval(function () {
-        timer = parseInt(moment().format("HHmm"));
+        if(parseInt(moment().format("mm")) < 55){
+          timer = parseInt(moment().format("HHmm"))+5;
+        }
+        else{
+          timer = parseInt(moment().format("HHmm"))+ 45;
+        }
+       
         for (let i = 0; i < 2; i++) {
-          if (timerGoal[i] === timer + 5) {
-            axios.post('http://localhost:3000/api/notifications', {
+          if (timerGoal[i] === timer) {
+            axios.post('http://calendar-api:3000/api/notifications', {
                 data: notification,
                 params:  {              
                   meeting : notifMeeting[i].title
@@ -157,7 +164,7 @@ export default {
               });
           }
         }
-      }, 60000);
+      }, 6000);
 
 
     },

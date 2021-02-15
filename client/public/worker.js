@@ -6,4 +6,17 @@ self.addEventListener('push', e => {
   });
 });
 
+self.addEventListener('notificationclick', function(event) {
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  event.waitUntil(clients.matchAll().then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url.endsWith('calendar') && 'focus' in client)
+        return client.focus();
+    }
+  }));
+});
+
 self.addEventListener('fetch', function(event) {})
