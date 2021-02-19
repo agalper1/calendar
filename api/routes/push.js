@@ -9,9 +9,9 @@ webpush.setVapidDetails('mailto:test@test.com', process.env.PUBLIC_VKEY,process.
 router.post('/notifications', (req,res) =>{
   const notification = req.body.data;
   const meeting = req.body.params.meeting;
-  console.log(meeting);
+  const link = req.body.params.link;
   res.status(201);
-  const payload = JSON.stringify({title: meeting});
+  const payload = JSON.stringify({title: meeting,link:link});
   webpush.sendNotification(notification,payload).catch(err => console.log(err));
 })
 

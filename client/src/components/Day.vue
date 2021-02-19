@@ -4,7 +4,7 @@
     <p :class="active ? '':'p-date'">{{currentDate}}</p>
 <transition name="fade" mode="in-out">
     <div v-if="active">
-      <Meeting  v-for="(meeting,index) in meetings" :key="index" :thisTitle="meetings[index].title" :thisTime="meetings[index].time" :thisLink="meetings[index].link" :thisWeekly="meetings[index].weekly" :thisNotes="meetings[index].notes" v-on:delete-meeting="deleteMeeting (index)" :meetingId="meetings[index]._id" />
+      <Meeting  ref="meeting" v-for="(meeting,index) in meetings" :key="index" :thisTitle="meetings[index].title" :thisTime="meetings[index].time" :thisLink="meetings[index].link" :thisWeekly="meetings[index].weekly" :thisNotes="meetings[index].notes" v-on:delete-meeting="deleteMeeting (index)" :meetingId="meetings[index]._id"/>
     </div>
 </transition>
    
@@ -12,7 +12,7 @@
     <div  v-if="active" class="gradient"></div>
 
 <transition name="fade" mode="in-out">
-    <div @click="addMeeting" class="add-btn" v-if="active">
+    <div @click="addMeeting()" class="add-btn" v-if="active">
       <b-icon class="h3" icon="plus" ></b-icon>
     </div>
  </transition>
@@ -38,11 +38,13 @@ export default {
   methods: {
     addMeeting() {
       this.meetings.push(1);
+      this.$nextTick( () => this.$refs.meeting[this.$refs.meeting.length-1].newMeeting());
     },
     updateMeeting() {
       this.getMeetings();
     },
     deleteMeeting(index){
+      if(this.meetings[index].title){
        const deletedId = this.meetings[index]._id;
        this.axios.delete('http://localhost:3000/api/meeting' + deletedId, {
         headers: {
@@ -57,6 +59,10 @@ export default {
           this.output = error;
           console.log(error.response.data);
         });
+        }
+        else{
+          this.meetings.splice(index,1);
+        }
     },
     getMeetings() {
       this.axios.get('http://localhost:3000/api/meeting', {
@@ -70,6 +76,7 @@ export default {
         .then(response => {
           this.meetings = response.data;
           this.meetings.sort((a, b) => parseFloat(a.time) - parseFloat(b.time));
+
         })
         .catch(error => {
           this.output = error;

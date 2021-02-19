@@ -42,6 +42,7 @@ import './registerServiceWorker'
 
 Vue.use(VueAxios, axios)
 
+
 export const eventBus = new Vue();
 
 

@@ -105,7 +105,8 @@ export default {
       this.updateDate(this.days[0].currentDate);
       this.$refs.day[0].getMeetings();
     },
-    async send(){
+    async send(){ 
+      let ref = this;
       let timer = moment().format("HHmm");
       let timerGoal = [];
       let notifMeeting = [];
@@ -117,11 +118,12 @@ export default {
       });
   
 
-      this.axios.get('http://localhost:3000/api/meeting', {
+      setInterval(function () {
+        ref.axios.get('http://localhost:3000/api/meeting', {
         headers: {
-          Authorization: this.token,
+          Authorization: ref.token,
           activedate: moment().format("D.M.YY"),
-          username: this.username,
+          username: ref.username,
           weekNr: moment().format("e")-1
         }
       })
@@ -129,14 +131,12 @@ export default {
           for(let i=0;i<response.data.length;i++){
           notifMeeting[i] = response.data[i];
           timerGoal[i] = parseInt(response.data[i].time.replace(":",""));
-          console.log(timerGoal[i]);
           }
         })
         .catch(error => {
           console.log(error.response.data);
         });
 
-      setInterval(function () {
         if(parseInt(moment().format("mm")) < 55){
           timer = parseInt(moment().format("HHmm"))+5;
         }
@@ -146,10 +146,11 @@ export default {
        
         for (let i = 0; i < 2; i++) {
           if (timerGoal[i] === timer) {
-            axios.post('http://calendar-api:3000/api/notifications', {
+            axios.post('http://localhost:3000/api/notifications', {
                 data: notification,
                 params:  {              
-                  meeting : notifMeeting[i].title
+                  meeting : notifMeeting[i].title,
+                  link: notifMeeting[i].link
                   },
                 headers: {
                   'content-type': 'application/json',
@@ -164,7 +165,7 @@ export default {
               });
           }
         }
-      }, 6000);
+      }, 60000);
 
 
     },
@@ -184,6 +185,10 @@ export default {
     }
   },
   created() {
+    if(!this.token){
+      this.$router.push('/');
+      alert("Bitte loggen sie sich ein!")
+    }
     this.init(this.week),
     this.activeDate = moment().format("DD.M.YY");
     this.updateDate(this.activeDate);

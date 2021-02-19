@@ -15,19 +15,23 @@
             </b-form-checkbox>
           </b-col>
         </b-row>
-        <b-row>
+        <b-row class="mt-3">
           <b-col>
             <input class="mb-4  ml-1" type="url" name="url" id="url" v-model="form.link" placeholder="Meeting Link"
               pattern="https://.*" required>
           </b-col>
           <b-col>
-            <input class="mb-4 ml-5" type="time" name="meetingtime" v-model="form.time" required>
+            <input class="mb-4 timeInput" type="time" name="meetingtime" v-model="form.time" required>
           </b-col>
-          <b-col>
+        </b-row>
+        <b-row class="mt-2">
+          <b-col class="mb-3">
+            <span @click="edit = false" class="cancel mx-auto">Abbrechen</span>
+          </b-col>
+          <b-col >
             <b-button class="addbtn" type="submit" variant="dark">Hinzufügen</b-button>
           </b-col>
         </b-row>
-        <b-row><span @click="edit = false" class="mt-4 cancel mx-auto">Abbrechen</span></b-row>
       </b-form>
 
       <!-- HTML WENN NICHT BEARBEITEN -->
@@ -157,10 +161,19 @@ export default {
         });
     },
     showNotes(){
+      if(this.thisTitle){
       this.form.notes = this.thisNotes;
+      }
+      else{
+        alert("Bitte lege zuerst ein Meeting an");
+        this.cancel();
+      }
     },
     cancel(){
       this.showModal = false;
+    },
+    newMeeting(){
+      this.edit=true;
     }
   },
   computed: {
@@ -175,6 +188,16 @@ export default {
 
 <style lang="scss"> 
 $primary: $bright;
+
+.col{
+  display: flex;
+  justify-content: center;
+}
+
+.col-6{
+  display: flex;
+  justify-content: center;
+}
 
 .meeting-container {
   display: flex;
@@ -203,6 +226,10 @@ $primary: $bright;
     .addbtn {
       background-color: $bright;
       border: 0;
+    }
+
+    .timeInput{
+     transform: translate(-13%,0);
     }
 
     // .checkbox {}
@@ -303,6 +330,17 @@ $primary: $bright;
     outline: 1px solid $bright;
   }
 }
+
+//MOBILE QUERY
+
+@media (max-width: 1315px) { 
+
+.timeInput{
+  transform: translate(0,0) !important;
+}
+}
+
+
     
 
 
