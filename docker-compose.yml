@@ -5,10 +5,10 @@ services:
     build: ./api
     environment:
       - SECRET_TOKEN=fu43infi34niufbi34uos90of
-      -PUBLIC_VKEY=BD_vAQOMuyUoqPhqd4A5x0D6mXe0isJQMJJqKpWrvYECOSgZpPq-CNRLCURa6Ax-65GV2_Ej92JIOgCj-6VhG4U
+      - PUBLIC_VKEY=BD_vAQOMuyUoqPhqd4A5x0D6mXe0isJQMJJqKpWrvYECOSgZpPq-CNRLCURa6Ax-65GV2_Ej92JIOgCj-6VhG4U
       - PRIVATE_VKEY=lSQKEL1vxq8fHXKaRM9IZSjo5zy1SA813HFAgkqGplA
       - DB_HOST=calendar-db
-      - DB_PORT=27017
+      - DB_PORT=27017 
     ports:
       - "3000:3000"
     depends_on:
