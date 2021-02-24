@@ -21,7 +21,8 @@ dotenv.config();
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 
-mongoose.connect(process.env.DB_CONNECT, () => console.log('Server gestartet'));
+mongoose.connect(encodeURI(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`), { useNewUrlParser: true}, () => console.log('Server gestartet'));
+
 
 
 
