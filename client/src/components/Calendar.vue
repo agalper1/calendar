@@ -119,7 +119,7 @@ export default {
   
 
       setInterval(function () {
-        ref.axios.get('https://calendar-api:3000/api/meeting', {
+        ref.axios.get('http://calendar-api:3000/api/meeting', {
         headers: {
           Authorization: ref.token,
           activedate: moment().format("D.M.YY"),
@@ -146,7 +146,7 @@ export default {
        
         for (let i = 0; i < 2; i++) {
           if (timerGoal[i] === timer) {
-            axios.post('https://calendar-api:3000/api/notifications', {
+            axios.post('http://calendar-api:3000/api/notifications', {
                 data: notification,
                 params:  {              
                   meeting : notifMeeting[i].title,

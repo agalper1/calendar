@@ -90,7 +90,7 @@ export default {
     onSubmit(event) {
       event.preventDefault()
       if(this.update == false){
-      this.axios.post('https://calendar-api:3000/api/meeting', {
+      this.axios.post('http://calendar-api:3000/api/meeting', {
           username: this.username,
           date: this.date,
           title: this.form.title,
@@ -109,7 +109,7 @@ export default {
         });
       }
       else{
-        this.axios.put('https://calendar-api:3000/api/meeting' + this.meetingId, {
+        this.axios.put('http://calendar-api:3000/api/meeting' + this.meetingId, {
           id: this.meetingId,
           title: this.form.title,
           weekly: this.form.weekly ? this.weekNr : 'unique meeting',
@@ -143,7 +143,7 @@ export default {
       this.form.link = this.thisLink;
       this.form.time = this.thisTime;
       this.form.weekly =this.thisWeekly;
-      this.axios.put('https://calendar-api:3000/api/meeting' + this.meetingId, {
+      this.axios.put('http://calendar-api:3000/api/meeting' + this.meetingId, {
           id: this.meetingId,
           title: this.form.title,
           link: this.form.link,
