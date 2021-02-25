@@ -46,7 +46,7 @@ export default {
     deleteMeeting(index){
       if(this.meetings[index].title){
        const deletedId = this.meetings[index]._id;
-       this.axios.delete('http://localhost:3000/api/meeting' + deletedId, {
+       this.axios.delete('http://calendar-api:3000/api/meeting' + deletedId, {
         headers: {
           id: deletedId
         }
@@ -65,7 +65,7 @@ export default {
         }
     },
     getMeetings() {
-      this.axios.get('http://localhost:3000/api/meeting', {
+      this.axios.get('http://calendar-api:3000/api/meeting', {
         headers: {
           Authorization: this.token,
           activedate: this.date,
