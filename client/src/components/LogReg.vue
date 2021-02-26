@@ -57,7 +57,7 @@ export default {
   },  
   methods: {
     login() {
-      this.axios.post('http://experiment.mi.hs-offenburg.de/api/login', {
+      this.axios.post('http://galperin.studio-m.mi.hs-offenburg.de/api/login', {
           username: this.username,
           password: this.password
         })
@@ -74,7 +74,7 @@ export default {
         });
     },
     register() {
-      this.axios.post('http://experiment.mi.hs-offenburg.de/api/register', {
+      this.axios.post('http://galperin.studio-m.mi.hs-offenburg.de/api/register', {
           username: this.username,
           password: this.password
         })

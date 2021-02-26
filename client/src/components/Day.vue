@@ -46,7 +46,7 @@ export default {
     deleteMeeting(index){
       if(this.meetings[index].title){
        const deletedId = this.meetings[index]._id;
-       this.axios.delete('http://experiment.mi.hs-offenburg.de/api/meeting' + deletedId, {
+       this.axios.delete('http://galperin.studio-m.mi.hs-offenburg.de/api/meeting' + deletedId, {
         headers: {
           id: deletedId
         }
@@ -65,7 +65,7 @@ export default {
         }
     },
     getMeetings() {
-      this.axios.get('http://experiment.mi.hs-offenburg.de/api/meeting', {
+      this.axios.get('http://galperin.studio-m.mi.hs-offenburg.de/api/meeting', {
         headers: {
           Authorization: this.token,
           activedate: this.date,

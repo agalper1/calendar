@@ -119,7 +119,7 @@ export default {
   
 
       setInterval(function () {
-        ref.axios.get('http://experiment.mi.hs-offenburg.de/api/meeting', {
+        ref.axios.get('http://galperin.studio-m.mi.hs-offenburg.de/api/meeting', {
         headers: {
           Authorization: ref.token,
           activedate: moment().format("D.M.YY"),
@@ -146,7 +146,7 @@ export default {
        
         for (let i = 0; i < 2; i++) {
           if (timerGoal[i] === timer) {
-            axios.post('http://experiment.mi.hs-offenburg.de/api/notifications', {
+            axios.post('http://galperin.studio-m.mi.hs-offenburg.de/api/notifications', {
                 data: notification,
                 params:  {              
                   meeting : notifMeeting[i].title,
